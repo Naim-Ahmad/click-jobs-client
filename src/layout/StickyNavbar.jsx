@@ -108,7 +108,6 @@ export default function StickyNavbar() {
               <Button
                 variant="gradient"
                 size="sm"
-                color="violet-500"
                 className="hidden lg:inline-block bg-violet-500"
               >
                 <Link to="/sign-in">
