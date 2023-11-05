@@ -10,7 +10,7 @@ export default function MainLayout() {
       <Toaster />
       <StickyNavbar />
       {/* <ComplexNavbar/> */}
-      <div className="min-h-[80svh]">
+      <div className="min-h-[90svh]">
         <Outlet></Outlet>
       </div>
       <Footer />

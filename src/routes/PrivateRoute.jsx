@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import MySpinner from '../components/MySpinner'
 import useAuth from '../hooks/useAuth'
 
 export default function PrivateRoute({children}) {
     const {user, loading} = useAuth()
-    const navigate = useNavigate()
     const {pathname} = useLocation()
     
     if(loading){
@@ -13,9 +12,7 @@ export default function PrivateRoute({children}) {
     }
 
     if(!user){
-        return navigate('/sign-in', {
-            state: pathname
-        })
+        return <Navigate state={pathname} to="/sign-in" />
     }
 
     return children

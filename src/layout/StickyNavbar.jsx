@@ -1,16 +1,131 @@
 import {
+  ChevronDownIcon,
+  Cog6ToothIcon,
+  InboxArrowDownIcon,
+  LifebuoyIcon,
+  PowerIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/solid";
+import {
+  Avatar,
   Button,
   Collapse,
   IconButton,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
   Navbar,
   Typography,
 } from "@material-tailwind/react";
 import React from "react";
+import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router-dom";
-import logo from '../assets/logo.jpg';
+import logo from "../assets/logo.jpg";
+import useAuth from '../hooks/useAuth';
+
+// profile menu component
+const profileMenuItems = [
+  {
+    label: "My Profile",
+    icon: UserCircleIcon,
+  },
+  {
+    label: "Edit Profile",
+    icon: Cog6ToothIcon,
+  },
+  {
+    label: "Inbox",
+    icon: InboxArrowDownIcon,
+  },
+  {
+    label: "Help",
+    icon: LifebuoyIcon,
+  },
+  {
+    label: "Sign Out",
+    icon: PowerIcon,
+  },
+];
+
+function ProfileMenu() {
+  const {logout, user} = useAuth()
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const closeMenu = (e) => {
+    setIsMenuOpen(false)
+    if(e.target.innerText === "Sign Out"){
+      logout()
+      .then(()=>{
+        toast.success('Sign Out Successful!')
+      })
+      .catch(err=> {
+        console.log(err)
+        toast.error(err.code)
+      })
+    }
+  };
+
+  return (
+    <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
+      <MenuHandler>
+        <Button
+          variant="text"
+          color="blue-gray"
+          className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5"
+        >
+          <Avatar
+            variant="circular"
+            size="sm"
+            alt="tania andrew"
+            className="border border-gray-900 p-0.5"
+            src={user?.photoURL || "https://i.ibb.co/fMhTpQd/no-User.jpg"}
+          />
+          <ChevronDownIcon
+            strokeWidth={2.5}
+            className={`h-3 w-3 transition-transform ${
+              isMenuOpen ? "rotate-180" : ""
+            }`}
+          />
+        </Button>
+      </MenuHandler>
+
+      <MenuList className="p-1">
+        {profileMenuItems.map(({ label, icon }, key) => {
+          const isLastItem = key === profileMenuItems.length - 1;
+          return (
+            <MenuItem
+              key={label}
+              onClick={closeMenu}
+              className={`flex items-center gap-2 rounded ${
+                isLastItem
+                  ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                  : ""
+              }`}
+            >
+              {React.createElement(icon, {
+                className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
+                strokeWidth: 2,
+              })}
+              <Typography
+                as="span"
+                variant="small"
+                className="font-normal"
+                color={isLastItem ? "red" : "inherit"}
+              >
+                {label}
+              </Typography>
+            </MenuItem>
+          );
+        })}
+      </MenuList>
+    </Menu>
+  );
+}
 
 export default function StickyNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
+  const { user } = useAuth();
 
   React.useEffect(() => {
     window.addEventListener(
@@ -93,26 +208,32 @@ export default function StickyNavbar() {
   );
 
   return (
-    <Navbar className="sticky top-0 max-w-full z-10 h-max rounded-none px-4 py-2 lg:px-8 lg:py-4">
+    <Navbar className="sticky top-0 max-w-full z-10 rounded-none py-2 px-0">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Link to="/"
-            className="mr-4 cursor-pointer py-1.5 flex items-center font-extrabold text-slate-900 md:text-2xl"
+          <Link
+            to="/"
+            className="mr-4 cursor-pointer flex items-center font-extrabold text-slate-900 md:text-2xl"
           >
-            <img src={logo} className="w-24" alt="" /> <span className="text-violet-500 -translate-x-4">Jobs</span>
+            <img src={logo} className="w-24" alt="" />{" "}
+            <span className="text-violet-500 -translate-x-4">Jobs</span>
           </Link>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden md:block">{navList}</div>
             <div className="flex items-center gap-x-1">
-              <Button
-                size="sm"
-                className="hidden md:inline-block bg-violet-500"
-              >
-                <Link to="/sign-in">
-                  {" "}
-                  <span>Sign in</span>
-                </Link>
-              </Button>
+              {!user ? (
+                <Button
+                  size="sm"
+                  className="hidden md:inline-block bg-violet-500"
+                >
+                  <Link to="/sign-in">
+                    {" "}
+                    <span>Sign in</span>
+                  </Link>
+                </Button>
+              ) : (
+                <ProfileMenu />
+              )}
             </div>
             <IconButton
               variant="text"
@@ -156,7 +277,12 @@ export default function StickyNavbar() {
         <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
-            <Button fullWidth variant="gradient" size="sm" className="bg-violet-500">
+            <Button
+              fullWidth
+              variant="gradient"
+              size="sm"
+              className="bg-violet-500"
+            >
               <span>Sign in</span>
             </Button>
           </div>
