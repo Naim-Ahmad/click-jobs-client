@@ -6,7 +6,7 @@ import {
   Typography
 } from "@material-tailwind/react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function StickyNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -26,9 +26,9 @@ export default function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Pages
-        </a>
+        <NavLink to="/" className={({isActive})=> isActive ? "flex items-center text-violet-500 font-extrabold": "flex items-center hover:text-violet-500"}>
+          Home
+        </NavLink>
       </Typography>
       <Typography
         as="li"
@@ -36,9 +36,9 @@ export default function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Account
-        </a>
+        <NavLink to="/all-jobs" className={({isActive})=> isActive ? "flex items-center text-violet-500 font-extrabold": "flex items-center hover:text-violet-500"}>
+          All Jobs
+        </NavLink>
       </Typography>
       <Typography
         as="li"
@@ -46,9 +46,9 @@ export default function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Blocks
-        </a>
+        <NavLink to="/post-jobs" className={({isActive})=> isActive ? "flex items-center text-violet-500 font-extrabold": "flex items-center hover:text-violet-500"}>
+          Post A Job
+        </NavLink>
       </Typography>
       <Typography
         as="li"
@@ -56,9 +56,9 @@ export default function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Docs
-        </a>
+        <NavLink to="/blogs" className={({isActive})=> isActive ? "flex items-center text-violet-500 font-extrabold": "flex items-center hover:text-violet-500"}>
+          Blogs
+        </NavLink>
       </Typography>
     </ul>
   );
@@ -69,9 +69,9 @@ export default function StickyNavbar() {
         <Typography
           as="a"
           href="#"
-          className="mr-4 cursor-pointer py-1.5 font-medium"
+          className="mr-4 cursor-pointer py-1.5 font-extrabold text-slate-900 md:text-2xl"
         >
-          Material Tailwind
+          Click <span className="text-violet-500">Jobs</span>
         </Typography>
         <div className="flex items-center gap-4">
           <div className="mr-4 hidden lg:block">{navList}</div>
@@ -80,7 +80,8 @@ export default function StickyNavbar() {
             <Button
               variant="gradient"
               size="sm"
-              className="hidden lg:inline-block"
+              color="violet-500"
+              className="hidden lg:inline-block bg-violet-500"
             >
              <Link to="/sign-in"> <span>Sign in</span></Link>
             </Button>
@@ -127,9 +128,6 @@ export default function StickyNavbar() {
       <Collapse open={openNav}>
         {navList}
         <div className="flex items-center gap-x-1">
-          <Button fullWidth variant="text" size="sm" className="">
-            <span>Log In</span>
-          </Button>
           <Button fullWidth variant="gradient" size="sm" className="">
             <span>Sign in</span>
           </Button>
