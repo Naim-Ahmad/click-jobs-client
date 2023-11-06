@@ -1,4 +1,4 @@
 /**
- * TODO: Create a divider or and social login
+ * TODO: Post job form validation
  *
  */

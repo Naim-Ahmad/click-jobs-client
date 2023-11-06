@@ -7,6 +7,7 @@ import {
 } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import MySpinner from '../../../components/MySpinner';
 import PrimaryButton from "../../../components/PrimaryButton";
 import axios from "../../../config/axios.config";
 import HorizontalCard from "./HorizontalCard";
@@ -17,7 +18,7 @@ export default function TabsDefault() {
     return res.data;
   };
 
-  const { data: jobs } = useQuery({
+  const { data: jobs, isLoading } = useQuery({
     queryKey: ["jobs"],
     queryFn: getJobs,
   });
@@ -57,7 +58,7 @@ export default function TabsDefault() {
           mount: { y: 0 },
           unmount: { y: 250 },
         }}>
-        {data.map(({ value }) => (
+        {isLoading ? <MySpinner/> :data.map(({ value }) => (
           <TabPanel className="min-h-fit" key={value} value={value}>
             <div className="grid lg:grid-cols-2 gap-4">
               {jobs?.map((job) => {

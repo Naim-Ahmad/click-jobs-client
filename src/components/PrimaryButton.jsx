@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default function PrimaryButton({children}) {
 
     return (
-        <Button className="bg-violet-500">{children}</Button>
+        <Button>{children}</Button>
     )
 }
 

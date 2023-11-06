@@ -236,7 +236,7 @@ export default function StickyNavbar() {
 
                   <Button
                     size="sm"
-                    className="hidden md:inline-block bg-violet-500"
+                    className="hidden md:inline-block"
                   >
                     <Link to="/sign-in">
                       {" "}
