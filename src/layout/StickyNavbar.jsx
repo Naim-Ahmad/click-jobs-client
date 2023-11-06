@@ -1,11 +1,9 @@
-import {
-  BriefcaseIcon
-} from "@heroicons/react/24/outline";
+import { BriefcaseIcon } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
   InboxArrowDownIcon,
   PowerIcon,
-  UserCircleIcon
+  UserCircleIcon,
 } from "@heroicons/react/24/solid";
 import {
   Avatar,
@@ -39,7 +37,7 @@ const profileMenuItems = [
     label: "Applied Jobs",
     icon: InboxArrowDownIcon,
   },
-  
+
   {
     label: "Sign Out",
     icon: PowerIcon,
@@ -68,14 +66,13 @@ function ProfileMenu() {
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
         <Button
-        title={user?.displayName}
+          title={user?.displayName}
           variant="text"
           color="blue-gray"
           className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5"
         >
           <Avatar
             variant="circular"
-            
             size="sm"
             alt={user?.displayName}
             className="border border-gray-900 p-0.5"
@@ -211,7 +208,7 @@ export default function StickyNavbar() {
   );
 
   return (
-    <Navbar className="sticky top-0 max-w-full z-10 rounded-none py-2 px-0">
+    <Navbar className="sticky top-0 max-w-full z-40 rounded-none py-2 px-0">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Link
@@ -225,15 +222,28 @@ export default function StickyNavbar() {
             <div className="mr-4 hidden md:block">{navList}</div>
             <div className="flex items-center gap-x-1">
               {!user ? (
-                <Button
-                  size="sm"
-                  className="hidden md:inline-block bg-violet-500"
-                >
-                  <Link to="/sign-in">
-                    {" "}
-                    <span>Sign in</span>
-                  </Link>
-                </Button>
+                <>
+                  <Button
+                    size="sm"
+                    variant="outlined"
+                    className="hidden md:inline-block"
+                  >
+                    <Link to="/sign-up">
+                      {" "}
+                      <span>Sign Up</span>
+                    </Link>
+                  </Button>
+
+                  <Button
+                    size="sm"
+                    className="hidden md:inline-block bg-violet-500"
+                  >
+                    <Link to="/sign-in">
+                      {" "}
+                      <span>Sign in</span>
+                    </Link>
+                  </Button>
+                </>
               ) : (
                 <ProfileMenu />
               )}
