@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import SocialLogin from "../../components/SocialLogin";
 import WebTitle from "../../components/WebTitle";
 import useAuth from "../../hooks/useAuth";
 
@@ -79,6 +80,7 @@ export default function SignIn() {
                   <Link to="/sign-up">Sign up</Link>
                 </Typography>
               </Typography>
+            <SocialLogin/>
             </CardFooter>
           </Card>
         </form>
