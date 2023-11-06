@@ -16,7 +16,7 @@ import useAuth from "../../hooks/useAuth";
 const strongPassword = /^(?=.*[A-Z])(?=.*[@#$%^&+=!]).*$/
 
 export default function SignUp() {
-  const { signUp, updateProfile } = useAuth();
+  const { signUp, updateUserInfo } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -43,11 +43,15 @@ export default function SignUp() {
     
     signUp(email, password)
       .then(() => {
-        updateProfile(name, photoURL)
+        updateUserInfo(name, photoURL)
           .then(() => {
             setLoading(false);
             toast.success("Registration Successful!");
-            state ? navigate(state) : navigate("/");
+            state ? navigate(state, {
+              replace: true
+            }) : navigate("/", {
+              replace: true
+            })
           })
           .catch((err) => {
             toast.error(err.code);

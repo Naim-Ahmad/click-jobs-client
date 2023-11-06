@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import IsLoggedIn from "../components/IsLoggedIn";
 import MainLayout from "../layout/MainLayout";
 import AddJobs from "../pages/AddJobs/AddJobs";
 import AllJobs from "../pages/AllJobs/AllJobs";
@@ -43,11 +44,11 @@ const router = createBrowserRouter([
 
             {
                 path: '/sign-in',
-                element: <SignIn/>
+                element: <IsLoggedIn><SignIn/></IsLoggedIn>
             },
             {
                 path: '/sign-up',
-                element: <SignUp/>,
+                element: <IsLoggedIn><SignUp/></IsLoggedIn>,
             },
 
         ]

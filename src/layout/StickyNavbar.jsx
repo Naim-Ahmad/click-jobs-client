@@ -1,10 +1,11 @@
 import {
+  BriefcaseIcon
+} from "@heroicons/react/24/outline";
+import {
   ChevronDownIcon,
-  Cog6ToothIcon,
   InboxArrowDownIcon,
-  LifebuoyIcon,
   PowerIcon,
-  UserCircleIcon,
+  UserCircleIcon
 } from "@heroicons/react/24/solid";
 import {
   Avatar,
@@ -22,7 +23,7 @@ import React from "react";
 import toast from "react-hot-toast";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.jpg";
-import useAuth from '../hooks/useAuth';
+import useAuth from "../hooks/useAuth";
 
 // profile menu component
 const profileMenuItems = [
@@ -31,17 +32,14 @@ const profileMenuItems = [
     icon: UserCircleIcon,
   },
   {
-    label: "Edit Profile",
-    icon: Cog6ToothIcon,
+    label: "My Jobs",
+    icon: BriefcaseIcon,
   },
   {
-    label: "Inbox",
+    label: "Applied Jobs",
     icon: InboxArrowDownIcon,
   },
-  {
-    label: "Help",
-    icon: LifebuoyIcon,
-  },
+  
   {
     label: "Sign Out",
     icon: PowerIcon,
@@ -49,20 +47,20 @@ const profileMenuItems = [
 ];
 
 function ProfileMenu() {
-  const {logout, user} = useAuth()
+  const { logout, user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const closeMenu = (e) => {
-    setIsMenuOpen(false)
-    if(e.target.innerText === "Sign Out"){
+    setIsMenuOpen(false);
+    if (e.target.innerText === "Sign Out") {
       logout()
-      .then(()=>{
-        toast.success('Sign Out Successful!')
-      })
-      .catch(err=> {
-        console.log(err)
-        toast.error(err.code)
-      })
+        .then(() => {
+          toast.success("Sign Out Successful!");
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error(err.code);
+        });
     }
   };
 
@@ -70,17 +68,20 @@ function ProfileMenu() {
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
         <Button
+        title={user?.displayName}
           variant="text"
           color="blue-gray"
           className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5"
         >
           <Avatar
             variant="circular"
+            
             size="sm"
-            alt="tania andrew"
+            alt={user?.displayName}
             className="border border-gray-900 p-0.5"
             src={user?.photoURL || "https://i.ibb.co/fMhTpQd/no-User.jpg"}
           />
+
           <ChevronDownIcon
             strokeWidth={2.5}
             className={`h-3 w-3 transition-transform ${
@@ -170,23 +171,25 @@ export default function StickyNavbar() {
           All Jobs
         </NavLink>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <NavLink
-          to="/post-jobs"
-          className={({ isActive }) =>
-            isActive
-              ? "flex items-center text-violet-500 font-extrabold"
-              : "flex items-center hover:text-violet-500"
-          }
+      {user && (
+        <Typography
+          as="li"
+          variant="small"
+          color="blue-gray"
+          className="p-1 font-normal"
         >
-          Post A Job
-        </NavLink>
-      </Typography>
+          <NavLink
+            to="/post-jobs"
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-center text-violet-500 font-extrabold"
+                : "flex items-center hover:text-violet-500"
+            }
+          >
+            Post A Job
+          </NavLink>
+        </Typography>
+      )}
       <Typography
         as="li"
         variant="small"
