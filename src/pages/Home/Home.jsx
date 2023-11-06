@@ -1,14 +1,12 @@
-import Container from "../../components/Container";
 import WebTitle from '../../components/WebTitle';
+import Hero from "./hero/Hero";
 
 export default function Home() {
 
     return (
         <div>
             <WebTitle>Home | Click Jobs</WebTitle>
-            <Container>
-                <p>Home</p>
-            </Container>
+            <Hero/>
         </div>
     )
 }

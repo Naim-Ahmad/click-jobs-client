@@ -5,6 +5,10 @@ module.exports = withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        'hero': "url('/Animated-Shape-2.svg')",
+        'footer-texture': "url('/img/footer-texture.png')",
+      },
       colors: {
         violet: {
           500: "#8b5cf6",
