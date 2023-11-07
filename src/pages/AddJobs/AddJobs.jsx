@@ -79,7 +79,7 @@ export default function AddJobs() {
 
   return (
     <>
-      <WebTitle>Post Jobs | Click Jobs</WebTitle>
+      <WebTitle>Post Jobs</WebTitle>
       <div className="pb-10">
         <Container>
           <SectionHeader>

@@ -7,9 +7,11 @@ import StickyNavbar from "./StickyNavbar";
 export default function MainLayout() {
   return (
     <div>
-      <Toaster />
+      <Toaster toastOptions={{
+        className: "min-w-fit"
+      }}/>
       <StickyNavbar />
-      {/* <ComplexNavbar/> */}
+      
       <div className="min-h-[90svh]">
         <Outlet></Outlet>
       </div>

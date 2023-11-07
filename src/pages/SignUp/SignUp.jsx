@@ -68,7 +68,7 @@ export default function SignUp() {
   };
   return (
     <>
-      <WebTitle>Sign Up | Click Jobs</WebTitle>
+      <WebTitle>Sign Up </WebTitle>
       <div className="flex items-center justify-center mt-2 min-h-[90svh]">
         <Card className="p-4" color="transparent">
           <Typography variant="h3" className="text-center border-t pt-5">

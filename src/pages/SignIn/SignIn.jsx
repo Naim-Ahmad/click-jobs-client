@@ -53,7 +53,7 @@ export default function SignIn() {
   }
   return (
     <>
-      <WebTitle> Sign In | Click Jobs</WebTitle>
+      <WebTitle> Sign In </WebTitle>
       <div className="flex items-center justify-center min-h-[80svh]">
         <form onSubmit={handleLogin}>
           <Card className="w-96">

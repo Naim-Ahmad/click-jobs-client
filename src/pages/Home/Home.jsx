@@ -6,7 +6,7 @@ export default function Home() {
 
     return (
         <div>
-            <WebTitle>Home | Click Jobs</WebTitle>
+            <WebTitle>Home </WebTitle>
             <Hero/>
             <JobCategories/>
         </div>

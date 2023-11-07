@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async'
 export default function WebTitle({children}) {
     return (
         <Helmet>
-            <title>{children}</title>
+            <title>{children} | Click Jobs</title>
         </Helmet>
     )
 }

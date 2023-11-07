@@ -1,23 +1,24 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
-    Avatar,
-    Button,
-    Card,
-    CardBody,
-    CardFooter,
-    CardHeader,
-    IconButton,
-    Input,
-    Tab,
-    Tabs,
-    TabsHeader,
-    Tooltip,
-    Typography,
+  Avatar,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  IconButton,
+  Input,
+  Tab,
+  Tabs,
+  TabsHeader,
+  Tooltip,
+  Typography,
 } from "@material-tailwind/react";
 import { TbCalendarTime } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import Container from "../../components/Container";
 import MySpinner from "../../components/MySpinner";
+import WebTitle from "../../components/WebTitle";
 import useJobs from "../../hooks/useJobs";
 
 const TABS = [
@@ -101,14 +102,13 @@ const TABLE_HEAD = [
 
 export default function AlJobs() {
   const { jobs, isLoading, isError, error } = useJobs();
-  // jobs?.forEach(job=> {
-  //     console.log(Object.keys(job).join(','))
-  // })
+  
   if (isLoading) {
     return <MySpinner />;
   }
   return (
     <div>
+      <WebTitle>All Jobs</WebTitle>
       <Container>
         <Card className="h-full w-full">
           <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -168,13 +168,9 @@ export default function AlJobs() {
                       jobBannerURL,
                       jobTitle,
                       loggedInUserName,
-                      loggedInUserEmail,
                       jobCategory,
                       salaryRange,
-                      jobDescription,
-                      jobPostingDate,
                       applicationDeadline,
-                      jobApplicantsNumber,
                     },
                     index
                   ) => {
