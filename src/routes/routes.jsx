@@ -44,7 +44,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/job-details/:id',
-                element: <JobDetails/>
+                element: <PrivateRoute><JobDetails/></PrivateRoute>
             },
 
             {
