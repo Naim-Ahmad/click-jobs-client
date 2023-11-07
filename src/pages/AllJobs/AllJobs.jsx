@@ -14,6 +14,7 @@ import {
   Tooltip,
   Typography,
 } from "@material-tailwind/react";
+import toast from "react-hot-toast";
 import { TbCalendarTime } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import Container from "../../components/Container";
@@ -106,6 +107,9 @@ export default function AlJobs() {
   if (isLoading) {
     return <MySpinner />;
   }
+
+  if(isError) return toast.error(error.message)
+  
   return (
     <div>
       <WebTitle>All Jobs</WebTitle>

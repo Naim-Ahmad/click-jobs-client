@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import IsLoggedIn from "../components/IsLoggedIn";
+import NotFound from "../components/NotFound";
 import MainLayout from "../layout/MainLayout";
 import AddJobs from "../pages/AddJobs/AddJobs";
 import AllJobs from "../pages/AllJobs/AllJobs";
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <MainLayout/>,
+        errorElement: <NotFound/>,
         children: [
             {
                 index: true,
@@ -36,11 +38,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/my-jobs',
-                element: <MyJobs/>
+                element: <PrivateRoute><MyJobs/></PrivateRoute>
             },
             {
                 path: '/profile',
-                element: <Profile/>
+                element: <PrivateRoute><Profile/></PrivateRoute>
             },
             {
                 path: '/job-details/:id',

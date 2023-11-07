@@ -8,6 +8,7 @@ module.exports = withMT({
       backgroundImage: {
         'hero': "url('/Animated-Shape-2.svg')",
         'footer-texture': "url('/img/footer-texture.png')",
+        'notFound': "url('/404.svg')",
       },
       colors: {
         violet: {

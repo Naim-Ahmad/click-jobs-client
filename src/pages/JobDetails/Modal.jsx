@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import {
-    Button,
-    Dialog,
-    DialogBody,
-    DialogFooter,
-    DialogHeader,
-    Input,
-    Spinner,
-    Typography,
+  Button,
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+  Input,
+  Spinner,
+  Typography,
 } from "@material-tailwind/react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
@@ -17,12 +17,13 @@ import useApplyJob from "../../hooks/useApplyJob";
 import useAuth from "../../hooks/useAuth";
 
 export default function Modal({ open, handleOpen, job }) {
+  console.log(job);
 
   const { user } = useAuth();
 
-  const {mutate, isPending, data} = useApplyJob()
+  const { mutate, isPending, data } = useApplyJob(job?._id);
 
-  const handleConfirm =  (e) => {
+  const handleConfirm = (e) => {
     e.preventDefault();
     const applierName = e.target.name.value;
     const applierEmail = e.target.email.value;
@@ -31,30 +32,30 @@ export default function Modal({ open, handleOpen, job }) {
       resumeURL,
       applierName,
       applierEmail,
-      ...job
+      ...job,
     };
     delete formData._id;
+    const loggedUser = user?.email.toLowerCase();
 
-    if(applierName.toLowerCase() === job?.loggedInUserName.toLowerCase()){
-        handleOpen()
-        return toast.error("You are employer. You can't apply this job!")
+    if (applierEmail.toLowerCase() === loggedUser) {
+      handleOpen();
+      return toast.error("You are employer. You can't apply this job!");
     }
 
-    if(Date.parse(job.applicationDeadline) <= Date.now()){
-        handleOpen()
-        return toast.error("Deadline is over. You can't apply this job!")
+    if (Date.parse(job.applicationDeadline) <= Date.now()) {
+      handleOpen();
+      return toast.error("Deadline is over. You can't apply this job!");
     }
-    
 
     mutate(formData);
   };
 
-  useEffect(()=>{
-    if(data?.insertedId) {
-        handleOpen()
-        toast.success('Successfully Applied!')
-      }
-  }, [data])
+  useEffect(() => {
+    if (data?.insertedId) {
+      handleOpen();
+      toast.success("Successfully Applied!");
+    }
+  }, [data]);
 
   return (
     <Dialog open={open} handler={handleOpen}>
@@ -115,7 +116,7 @@ export default function Modal({ open, handleOpen, job }) {
               <span>Cancel</span>
             </Button>
             <Button type="submit" className="bg-violet-500">
-              {isPending ? <Spinner/>: <span>Submit</span>}
+              {isPending ? <Spinner /> : <span>Submit</span>}
             </Button>
           </DialogFooter>
         </form>

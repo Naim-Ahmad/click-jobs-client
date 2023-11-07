@@ -35,8 +35,8 @@ export default function JobDetails() {
       <WebTitle>Job Details</WebTitle>
       <Container>
         <div className="flex max-h-screen">
-          <div className="border w-1/2"></div>
-          <div className="border h-52">
+          <div className="border w-1/2 "></div>
+          <div className="border h-52 ">
             <Button onClick={handleOpen}>Apply</Button>
           </div>
         </div>

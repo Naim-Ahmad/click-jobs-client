@@ -28,14 +28,17 @@ const profileMenuItems = [
   {
     label: "My Profile",
     icon: UserCircleIcon,
+    route: "/my-profile",
   },
   {
     label: "My Jobs",
     icon: BriefcaseIcon,
+    route: "/my-jobs",
   },
   {
     label: "Applied Jobs",
     icon: InboxArrowDownIcon,
+    route: "/applied-jobs",
   },
 
   {
@@ -89,31 +92,33 @@ function ProfileMenu() {
       </MenuHandler>
 
       <MenuList className="p-1">
-        {profileMenuItems.map(({ label, icon }, key) => {
+        {profileMenuItems.map(({ label, icon, route }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
           return (
-            <MenuItem
-              key={label}
-              onClick={closeMenu}
-              className={`flex items-center gap-2 rounded ${
-                isLastItem
-                  ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                  : ""
-              }`}
-            >
-              {React.createElement(icon, {
-                className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
-                strokeWidth: 2,
-              })}
-              <Typography
-                as="span"
-                variant="small"
-                className="font-normal"
-                color={isLastItem ? "red" : "inherit"}
+            <Link to={route} key={label}>
+              <MenuItem
+                
+                onClick={closeMenu}
+                className={`flex items-center gap-2 rounded ${
+                  isLastItem
+                    ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                    : ""
+                }`}
               >
-                {label}
-              </Typography>
-            </MenuItem>
+                {React.createElement(icon, {
+                  className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
+                  strokeWidth: 2,
+                })}
+                <Typography
+                  as="span"
+                  variant="small"
+                  className="font-normal"
+                  color={isLastItem ? "red" : "inherit"}
+                >
+                  {label}
+                </Typography>
+              </MenuItem>
+            </Link>
           );
         })}
       </MenuList>
@@ -234,10 +239,7 @@ export default function StickyNavbar() {
                     </Link>
                   </Button>
 
-                  <Button
-                    size="sm"
-                    className="hidden md:inline-block"
-                  >
+                  <Button size="sm" className="hidden bg-violet-500 md:inline-block">
                     <Link to="/sign-in">
                       {" "}
                       <span>Sign in</span>
