@@ -5,6 +5,7 @@ import AddJobs from "../pages/AddJobs/AddJobs";
 import AllJobs from "../pages/AllJobs/AllJobs";
 import Blogs from "../pages/Blogs/Blogs";
 import Home from "../pages/Home/Home";
+import JobDetails from "../pages/JobDetails/JobDetails";
 import MyJobs from "../pages/MyJobs/MyJobs";
 import Profile from "../pages/Profile/Profile";
 import SignIn from "../pages/SignIn/SignIn";
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: '/profile',
                 element: <Profile/>
+            },
+            {
+                path: '/job-details/:id',
+                element: <JobDetails/>
             },
 
             {

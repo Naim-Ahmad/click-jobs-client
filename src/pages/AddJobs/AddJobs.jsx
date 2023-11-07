@@ -128,6 +128,7 @@ export default function AddJobs() {
                     labelProps={{
                       className: "before:content-none after:content-none",
                     }}
+                    required
                   />
                 </div>
 

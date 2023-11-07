@@ -6,9 +6,7 @@ import {
   TabsHeader
 } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
 import MySpinner from '../../../components/MySpinner';
-import PrimaryButton from "../../../components/PrimaryButton";
 import axios from "../../../config/axios.config";
 import HorizontalCard from "./HorizontalCard";
 
@@ -32,15 +30,15 @@ export default function TabsDefault() {
     },
     {
       label: "Remote",
-      value: "react",
+      value: "remote",
     },
     {
       label: "Part Time",
-      value: "vue",
+      value: "part time",
     },
     {
       label: "Hybrid",
-      value: "angular",
+      value: "hybrid",
     },
   ];
 
@@ -60,16 +58,16 @@ export default function TabsDefault() {
         }}>
         {isLoading ? <MySpinner/> :data.map(({ value }) => (
           <TabPanel className="min-h-fit" key={value} value={value}>
-            <div className="grid lg:grid-cols-2 gap-4">
+            <div className="grid lg:grid-cols-3 gap-6">
               {jobs?.map((job) => {
                 if (job.jobCategory.toLowerCase() === value) {
                   return <HorizontalCard key={job._id} job={job}/>;
                 }
               })}
             </div>
-            <div className="text-center my-5">
+            {/* <div className="text-center my-5">
             <Link to="/all-jobs"><PrimaryButton>View All Jobs</PrimaryButton></Link>
-            </div>
+            </div> */}
           </TabPanel>
         ))}
       </TabsBody>

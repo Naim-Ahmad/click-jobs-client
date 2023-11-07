@@ -12,6 +12,7 @@ module.exports = withMT({
       colors: {
         violet: {
           500: "#8b5cf6",
+          400: "#a78bfa",
         },
   
         slate: {
