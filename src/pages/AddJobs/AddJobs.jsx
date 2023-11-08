@@ -142,10 +142,10 @@ export default function AddJobs() {
                     label="Select a category"
                     onChange={handleSelect}
                   >
-                    <Option value="on site">On Site</Option>
-                    <Option value="remote">Remote</Option>
-                    <Option value="part time">Part Time</Option>
-                    <Option value="hybrid">Hybrid</Option>
+                    <Option value="On Site">On Site</Option>
+                    <Option value="Remote">Remote</Option>
+                    <Option value="Part Time">Part Time</Option>
+                    <Option value="Hybrid">Hybrid</Option>
                   </Select>
                 </div>
 

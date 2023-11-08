@@ -17,7 +17,6 @@ import useApplyJob from "../../hooks/useApplyJob";
 import useAuth from "../../hooks/useAuth";
 
 export default function Modal({ open, handleOpen, job }) {
-  console.log(job);
 
   const { user } = useAuth();
 
@@ -35,9 +34,11 @@ export default function Modal({ open, handleOpen, job }) {
       ...job,
     };
     delete formData._id;
-    const loggedUser = user?.email.toLowerCase();
 
-    if (applierEmail.toLowerCase() === loggedUser) {
+    const loggedUser = applierEmail.toLowerCase();
+    const postedBy = job?.loggedInUserEmail?.toLowerCase()
+
+    if (postedBy === loggedUser) {
       handleOpen();
       return toast.error("You are employer. You can't apply this job!");
     }
@@ -46,6 +47,8 @@ export default function Modal({ open, handleOpen, job }) {
       handleOpen();
       return toast.error("Deadline is over. You can't apply this job!");
     }
+
+    console.log(formData)
 
     mutate(formData);
   };

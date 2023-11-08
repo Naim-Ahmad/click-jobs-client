@@ -4,6 +4,7 @@ import NotFound from "../components/NotFound";
 import MainLayout from "../layout/MainLayout";
 import AddJobs from "../pages/AddJobs/AddJobs";
 import AllJobs from "../pages/AllJobs/AllJobs";
+import AppliedJobs from "../pages/AppliedJobs/AppliedJobs";
 import Blogs from "../pages/Blogs/Blogs";
 import Home from "../pages/Home/Home";
 import JobDetails from "../pages/JobDetails/JobDetails";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
             {
                 path: '/profile',
                 element: <PrivateRoute><Profile/></PrivateRoute>
+            },
+            {
+                path: '/applied-jobs',
+                element: <PrivateRoute><AppliedJobs/></PrivateRoute>
             },
             {
                 path: '/job-details/:id',
