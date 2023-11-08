@@ -26,5 +26,3 @@ Date Picker: Use of Tanstack Query and a date picker component for date-related 
 5. **Responsive Design**: The website's fully responsive design ensures a seamless user experience on a variety of devices, making job searching and application management accessible on the go.
 
 6. **Confirmation Emails**: Upon applying for a job, users receive confirmation emails, enhancing engagement and keeping applicants informed about the status of their applications.
-
-7. **Modern Technologies**: "Click Jobs" leverages a suite of modern technologies, including Firebase for authentication, Tanstack Query, Axios, and other tools, to enhance functionality and the overall user experience.

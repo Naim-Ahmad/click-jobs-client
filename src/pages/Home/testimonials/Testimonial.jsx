@@ -1,10 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import Container from "../../../components/Container";
+import MySpinner from "../../../components/MySpinner";
 import SectionDescription from "../../../components/SectionDescription";
 import SectionHeader from "../../../components/SectionHeader";
 import SectionTitle from "../../../components/SectionTitle";
+import useAxios from "../../../hooks/useAxios";
 import TestimonialCard from "./TestimonialCard";
 
 export default function Testimonial() {
+  const axios = useAxios()
+
+  const {data, isLoading} = useQuery({
+    queryKey: ['stories'],
+    queryFn: async ()=> {
+      const res = await axios.get('/stories')
+      return res.data
+    }
+  })
+
+  if(isLoading)return <MySpinner/>
+
   return (
     <div>
       <Container>
@@ -18,12 +33,8 @@ export default function Testimonial() {
         </SectionHeader>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
-          <TestimonialCard />
+          
+         {data?.map(d=> <TestimonialCard key={d._id} data={d}/>)}
         </div>
       </Container>
     </div>
