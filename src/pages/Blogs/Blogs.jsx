@@ -1,12 +1,13 @@
-import naimImage from '../../assets/naimahmad.jpeg';
-
+import naimImage from "../../assets/naimahmad.jpeg";
 
 export default function Blogs() {
   return (
     <div>
       <header className="max-w-[900px] mx-auto px-4 sm:px-10 mt-6">
         <h1 className="text-4xl font-extrabold">
-          Difference between var, let, const. nul vs undefined. Rest API
+          - What is an access token and refresh token? How do they work and
+          where should we store them on the client-side? - What is express js?
+          What is Nest JS (google it)? - Explain your code.
         </h1>
         <div className="flex mt-6">
           <figure className="me-4">
@@ -23,24 +24,77 @@ export default function Blogs() {
       <main className="max-w-[900px] mx-auto mt-6 px-4 sm:px-10">
         <div className="divider"></div>
         <article>
-          <section>
-            <h2 className="text-3xl font-semibold">
-              var, let, const এর মধ্যে পার্থক্য
-            </h2>
-            <p className="text-lg" id="let-var-const"></p>
-          </section>
-          <div className="divider"></div>
-          <section className="">
-            <h2 className="text-3xl font-semibold">null vs undefined</h2>
-            <p className="text-lg" id="null-undefined"></p>
-          </section>
-          <div className="divider"></div>
-          <section className="pb-8">
-            <h2 className="text-3xl font-semibold">
-              API (application programming interface)
-            </h2>
-            <p className="text-lg" id="api"></p>
-          </section>
+          <div>
+            <h2>Access Token and Refresh Token</h2>
+
+            <p>
+              <strong>Access Token:</strong> An access token is a temporary and
+              short-lived credential that is used to access protected resources
+              on a server. It is typically issued by an authentication server
+              when a user or application successfully authenticates. Access
+              tokens are used to make authenticated requests to APIs, services,
+              or resources.
+            </p>
+
+            <p>
+              <strong>Refresh Token:</strong> A refresh token is a longer-lived
+              credential that is used to obtain a new access token when the
+              original access token expires. It is typically used in combination
+              with an access token to maintain continuous access to resources
+              without requiring the user to re-enter their credentials.
+            </p>
+
+            <h3>How they work:</h3>
+            <ol>
+              <li>
+                When a user or application authenticates, the authentication
+                server issues an access token with a specific expiration time.
+              </li>
+              <li>
+                The client-side (e.g., a web or mobile app) stores the access
+                token securely.
+              </li>
+              <li>
+                When the access token expires, the client can use the refresh
+                token to request a new access token from the authentication
+                server without requiring the user to re-authenticate.
+              </li>
+              <li>
+                The refresh token itself is typically long-lived and should be
+                stored securely on the client-side.
+              </li>
+            </ol>
+
+            <h3>Storage on the client-side:</h3>
+            <p>
+              Access tokens and refresh tokens should be stored securely on the
+              client-side to prevent unauthorized access. Common storage options
+              include:
+            </p>
+            <ul>
+              <li>
+                Browser storage (LocalStorage or SessionStorage): Suitable for
+                web applications, but not the most secure option.
+              </li>
+              <li>
+                Cookies: Can be used for storing tokens with appropriate
+                security settings (e.g., HttpOnly and Secure flags).
+              </li>
+              <li>
+                Mobile app storage: In the case of mobile apps, tokens can be
+                stored in secure storage mechanisms provided by the platform
+                (e.g., Keychain in iOS, Keystore in Android).
+              </li>
+              <li>
+                In-memory storage: For single-page applications, tokens can be
+                stored in memory but may be vulnerable to certain attacks.
+              </li>
+              <li>
+                Native app secure storage: For desktop or native mobile apps,
+                there are platform-specific secure storage mechanisms.
+              </li>
+            </ul>
+          </div>
         </article>
       </main>
     </div>
