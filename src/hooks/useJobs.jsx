@@ -7,10 +7,10 @@ export default function useJobs() {
         return res.data;
       };
     
-      const { data: jobs, isLoading, isError, error } = useQuery({
+      const { data: jobs, isLoading, isError, error, isFetched } = useQuery({
         queryKey: ["jobs"],
         queryFn: getJobs,
       });
 
-    return {jobs, isLoading, isError, error }
+    return {jobs, isLoading, isError, error, isFetched}
 }

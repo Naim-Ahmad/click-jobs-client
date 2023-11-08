@@ -1,4 +1,6 @@
 import { Typography } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
+import logo from "../assets/logo.jpg";
  
 const LINKS = [
   {
@@ -19,11 +21,17 @@ const currentYear = new Date().getFullYear();
  
 export default function Footer() {
   return (
-    <footer className="relative w-full">
+    <footer className="relative w-full border-t-2 py-10">
       <div className="mx-auto w-full max-w-7xl py-4 px-8">
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
           <Typography variant="h5" className="mb-6">
-            Material Tailwind
+          <Link
+            to="/"
+            className="mr-4 cursor-pointer flex items-center font-extrabold text-slate-900 md:text-2xl"
+          >
+            <img src={logo} className="w-24" alt="" />{" "}
+            <span className="text-violet-500 -translate-x-4">Jobs</span>
+          </Link>
           </Typography>
           <div className="grid grid-cols-3 justify-between gap-4">
             {LINKS.map(({ title, items }) => (

@@ -1,10 +1,8 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   Avatar,
   Button,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   IconButton,
   Input,
@@ -14,6 +12,7 @@ import {
   Tooltip,
   Typography,
 } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { TbCalendarTime } from "react-icons/tb";
 import { Link } from "react-router-dom";
@@ -102,14 +101,38 @@ const TABLE_HEAD = [
 // ];
 
 export default function AlJobs() {
-  const { jobs, isLoading, isError, error } = useJobs();
-  
+  const { jobs: data, isLoading, isError, error, isFetched } = useJobs();
+
+  const [jobs, setJobs] = useState([]);
+
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    if (isFetched) setJobs(data);
+  }, [data]);
+
+  const handleSearch = () => {
+    console.log(search);
+    const searchString = search.toLowerCase();
+
+    if (!searchString) {
+      return setJobs(data);
+    }
+
+    const filteredJobs = jobs?.filter((obj) => {
+      const dataString = obj.jobTitle.toLowerCase();
+      return dataString.startsWith(searchString)
+    });
+
+    setJobs(filteredJobs);
+  };
+
   if (isLoading) {
     return <MySpinner />;
   }
 
-  if(isError) return toast.error(error.message)
-  
+  if (isError) return toast.error(error.message);
+
   return (
     <div>
       <WebTitle>All Jobs</WebTitle>
@@ -136,15 +159,31 @@ export default function AlJobs() {
                   ))}
                 </TabsHeader>
               </Tabs>
-              <div className="w-full md:w-72">
-                <Input
+              <div className="relative flex w-full max-w-[24rem] md:w-72">
+                {/* <Input
                   label="Search"
                   icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+                /> */}
+                <Input
+                  type="search"
+                  label="Job title"
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="pr-20"
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
                 />
+                <Button
+                  onClick={handleSearch}
+                  size="sm"
+                  className="!absolute bg-violet-500 right-1 top-1 rounded"
+                >
+                  Search
+                </Button>
               </div>
             </div>
           </CardHeader>
-          <CardBody className="overflow-scroll px-0">
+          <CardBody className="overflow-y-scroll px-0">
             <table className="mt-4 w-full min-w-max table-auto text-left">
               <thead>
                 <tr>
@@ -267,7 +306,7 @@ export default function AlJobs() {
               </tbody>
             </table>
           </CardBody>
-          <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+          {/* <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
             <Typography
               variant="small"
               color="blue-gray"
@@ -283,7 +322,7 @@ export default function AlJobs() {
                 Next
               </Button>
             </div>
-          </CardFooter>
+          </CardFooter> */}
         </Card>
       </Container>
     </div>

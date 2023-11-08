@@ -6,9 +6,9 @@ export default function Hero() {
   return (
     <div className="bg-hero min-h-[68svh]">
       <Container>
-        <div className="flex">
-          <div className="flex-1 flex gap-4 flex-col justify-center">
-            <Typography className="" variant="h1" color="blue-gray" as="h1">
+        <div className="md:flex translate-y-20 md:translate-y-0">
+          <div className="flex-1 text-center md:text-left flex gap-4 flex-col items-center md:items-start justify-center">
+            <Typography className="text-3xl sm:text-4xl md:text-5xl" variant="h1" color="blue-gray" as="h1">
               Discover Your <span className="text-violet-500">Dream</span> Job
               with
               <span className="text-violet-500">Click Jobs</span>
@@ -32,7 +32,7 @@ export default function Hero() {
               </Button>
             </div>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 hidden md:block">
             <img className="translate-y-6" src={manImage} alt="" />
           </div>
         </div>

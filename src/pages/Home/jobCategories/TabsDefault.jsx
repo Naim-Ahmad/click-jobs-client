@@ -43,7 +43,7 @@ console.log(jobs)
     <Tabs value="on site">
       <TabsHeader className="max-w-4xl mx-auto">
         {data.map(({ label, value }) => (
-          <Tab className="z-1" key={value} value={value}>
+          <Tab className="z-1 tab-list" key={value} value={value}>
             {label}
           </Tab>
         ))}
@@ -56,7 +56,7 @@ console.log(jobs)
         {isLoading ? <MySpinner/> : data.map(({ value }) => (
           <TabPanel className="min-h-fit" key={value} value={value}>
             {isError && <Typography as="h3" variant="h3" className="text-center">{error?.message}</Typography>}
-            <div className="grid lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {jobs?.map((job) => {
                 if (job.jobCategory.toLowerCase() === value) {
                   return <HorizontalCard key={job._id} job={job}/>;

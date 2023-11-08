@@ -97,7 +97,6 @@ function ProfileMenu() {
           return (
             <Link to={route} key={label}>
               <MenuItem
-                
                 onClick={closeMenu}
                 className={`flex items-center gap-2 rounded ${
                   isLastItem
@@ -214,13 +213,13 @@ export default function StickyNavbar() {
 
   return (
     <Navbar className="sticky top-0 max-w-full z-40 rounded-none py-2 px-0">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl px-4 md:pr-4 md:pl-0 mx-auto">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Link
             to="/"
             className="mr-4 cursor-pointer flex items-center font-extrabold text-slate-900 md:text-2xl"
           >
-            <img src={logo} className="w-24" alt="" />{" "}
+            <img src={logo} className="w-16 md:w-24" alt="" />{" "}
             <span className="text-violet-500 -translate-x-4">Jobs</span>
           </Link>
           <div className="flex items-center gap-4">
@@ -228,23 +227,27 @@ export default function StickyNavbar() {
             <div className="flex items-center gap-x-1">
               {!user ? (
                 <>
-                  <Button
-                    size="sm"
-                    variant="outlined"
-                    className="hidden md:inline-block"
-                  >
-                    <Link to="/sign-up">
+                  <Link to="/sign-up">
+                    <Button
+                      size="sm"
+                      variant="outlined"
+                      color="purple"
+                      className="hidden md:inline-block"
+                    >
                       {" "}
                       <span>Sign Up</span>
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
 
-                  <Button size="sm" className="hidden bg-violet-500 md:inline-block">
-                    <Link to="/sign-in">
+                  <Link to="/sign-in">
+                    <Button
+                      size="sm"
+                      className="hidden bg-violet-500 md:inline-block"
+                    >
                       {" "}
                       <span>Sign in</span>
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
                 </>
               ) : (
                 <ProfileMenu />
@@ -292,14 +295,23 @@ export default function StickyNavbar() {
         <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
-            <Button
-              fullWidth
-              variant="gradient"
-              size="sm"
-              className="bg-violet-500"
-            >
-              <span>Sign in</span>
-            </Button>
+            <Link to="/sign-up" className="w-full">
+              <Button
+                size="sm"
+                fullWidth
+                variant="outlined"
+                color="purple"
+                className=""
+              >
+                {" "}
+                <span>Sign Up</span>
+              </Button>
+            </Link>
+            <Link to="/sign-in" className="w-full">
+              <Button fullWidth size="sm" className="bg-violet-500">
+                <span>Sign in</span>
+              </Button>
+            </Link>
           </div>
         </Collapse>
       </div>

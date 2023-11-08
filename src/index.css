@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (max-width: 392px) {
+  .tab-list {
+    font-size: 11px;
+  }
+}

@@ -31,7 +31,7 @@ export default function HorizontalCard({ job }) {
             <span>{jobPostingDate}</span>
           </Typography>
         </div>
-        <div className="my-3 flex justify-evenly">
+        <div className="my-3 flex flex-col sm:flex-row items-center justify-evenly">
           <Typography as="p" variant="paragraph" className="font-normal">
             {salaryRange}
           </Typography>
