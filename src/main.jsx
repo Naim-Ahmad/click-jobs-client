@@ -1,3 +1,4 @@
+import emailjs from '@emailjs/browser';
 import { ThemeProvider } from "@material-tailwind/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
@@ -7,6 +8,8 @@ import { RouterProvider } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider.jsx";
 import "./index.css";
 import router from "./routes/routes.jsx";
+
+emailjs.init("hHTXS9JawQYx_zKJU")
 
 const client = new QueryClient();
 

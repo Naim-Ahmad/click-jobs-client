@@ -1,17 +1,17 @@
 import { PencilIcon } from "@heroicons/react/24/solid";
 import {
-    Avatar,
-    Card,
-    CardBody,
-    CardHeader,
-    IconButton,
-    Tooltip,
-    Typography,
+  Avatar,
+  Card,
+  CardBody,
+  CardHeader,
+  IconButton,
+  Tooltip,
+  Typography,
 } from "@material-tailwind/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { TbCalendarTime } from "react-icons/tb";
-import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import Container from "../../components/Container";
 import MySpinner from "../../components/MySpinner";
@@ -20,6 +20,7 @@ import WebTitle from "../../components/WebTitle";
 import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 import useJobsQuery from "../../hooks/useJobsQuery";
+import EditJobs from "./EditJobs";
 
 const TABLE_HEAD = [
   "Job Title",
@@ -31,6 +32,12 @@ const TABLE_HEAD = [
 
 export default function MyJobs() {
   const { user } = useAuth();
+
+  const [open, setOpen] = useState({ id: "", state: false });
+
+  const handleOpen = (id) => setOpen({ ...open, id, state: !open?.state });
+
+  // console.log(open)
 
   const axios = useAxios();
 
@@ -70,8 +77,7 @@ export default function MyJobs() {
 
   if (isLoading) return <MySpinner />;
   if (isError) return toast.error(error.message);
-  //   if(isPending)
-  console.log(jobs);
+
   if (isSuccess) {
     Swal.fire({
       title: "Deleted!",
@@ -188,13 +194,14 @@ export default function MyJobs() {
                             </Typography>
                           </td>
                           <td className={classes}>
-                            <Link to={`/job-details/${_id}`}>
-                              <Tooltip content="Edit Info">
-                                <IconButton variant="text">
-                                  <PencilIcon className="h-4 w-4" />
-                                </IconButton>
-                              </Tooltip>
-                            </Link>
+                            <Tooltip content="Edit Info">
+                              <IconButton
+                                onClick={() => handleOpen(_id)}
+                                variant="text"
+                              >
+                                <PencilIcon className="h-4 w-4" />
+                              </IconButton>
+                            </Tooltip>
 
                             <Tooltip content="Delete Job">
                               <IconButton
@@ -247,6 +254,8 @@ export default function MyJobs() {
           </CardFooter> */}
         </Card>
       </Container>
+
+     <EditJobs open={open} handleOpen={handleOpen} />
     </div>
   );
 }

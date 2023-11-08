@@ -7,7 +7,6 @@ import {
   Spinner,
   Typography,
 } from "@material-tailwind/react";
-import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
@@ -17,22 +16,13 @@ import SectionHeader from "../../components/SectionHeader";
 import SectionTitle from "../../components/SectionTitle";
 import WebTitle from "../../components/WebTitle";
 import useAuth from "../../hooks/useAuth";
-import useAxios from "../../hooks/useAxios";
+import usePostJob from "../../hooks/usePostJob";
 
 export default function AddJobs() {
   const [selectValue, setSelectValue] = useState("");
   const { user } = useAuth();
-  const axios = useAxios()
 
-
-
-  const {mutate, isPending, isSuccess, isError, error} = useMutation({
-    mutationKey: ["postJob"],
-    mutationFn: async (formData)=>{
-      const res = await axios.post('/add-jobs', formData)
-      return res.data
-    }
-  })
+  const {mutate, isPending, isSuccess, isError, error} = usePostJob()
 
   const handleSelect = (e) => {
     setSelectValue(e);

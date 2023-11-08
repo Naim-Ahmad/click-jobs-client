@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import emailjs from '@emailjs/browser';
 import {
   Button,
   Dialog,
@@ -9,18 +10,31 @@ import {
   Spinner,
   Typography,
 } from "@material-tailwind/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import SectionDescription from "../../components/SectionDescription";
 import SectionTitle from "../../components/SectionTitle";
 import useApplyJob from "../../hooks/useApplyJob";
 import useAuth from "../../hooks/useAuth";
 
+const templateParams = {
+  applier_name: "",
+  applier_email: "",
+  hr_name: "",
+  job_title: "",
+  hr_email: "",
+  job_category: ""
+}
+
 export default function Modal({ open, handleOpen, job }) {
 
   const { user } = useAuth();
 
-  const { mutate, isPending, data } = useApplyJob(job?._id);
+  const { mutate, data } = useApplyJob(job?._id);
+
+  const [isPending, setIsPending] = useState(false)
+
+
 
   const handleConfirm = (e) => {
     e.preventDefault();
@@ -47,16 +61,32 @@ export default function Modal({ open, handleOpen, job }) {
       handleOpen();
       return toast.error("Deadline is over. You can't apply this job!");
     }
-
+    
     console.log(formData)
+    setIsPending(true)
 
+    templateParams.applier_email = formData.applierEmail
+    templateParams.applier_name = formData.applierName
+    templateParams.hr_name = formData.loggedInUserName
+    templateParams.hr_email = formData.loggedInUserEmail
+    templateParams.job_title = formData.jobTitle
+    templateParams.job_category = formData.jobCategory
+
+    console.log(templateParams)
     mutate(formData);
   };
 
   useEffect(() => {
     if (data?.insertedId) {
-      handleOpen();
-      toast.success("Successfully Applied!");
+      emailjs.send('service_ov9xwqc', "template_6d4qoeg", templateParams)
+      .then((response)=> {
+        setIsPending(false)
+        handleOpen();
+        toast.success("Successfully Applied Check Your Email!");
+        console.log('SUCCESS!', response.status, response.text);
+     },(error) => {
+        console.log('FAILED...', error);
+     });
     }
   }, [data]);
 
