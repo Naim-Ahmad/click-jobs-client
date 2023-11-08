@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "../config/axios.config";
+import useAxios from "./useAxios";
 
 export default function useJobs() {
+  const axios = useAxios()
     const getJobs = async () => {
         const res = await axios.get("/jobs");
         return res.data;
