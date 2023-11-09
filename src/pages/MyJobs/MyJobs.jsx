@@ -4,6 +4,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Chip,
   IconButton,
   Tooltip,
   Typography,
@@ -48,7 +49,7 @@ export default function MyJobs() {
     return res.data;
   };
 
-  const { mutate, isPending, isSuccess } = useMutation({
+  const { mutate, isSuccess } = useMutation({
     mutationKey: ["delete-job"],
     mutationFn: deleteJob,
     onSuccess: queryClient.invalidateQueries({ queryKey: ["jobsQuery"] }),
@@ -174,9 +175,36 @@ export default function MyJobs() {
                               <Typography
                                 variant="small"
                                 color="blue-gray"
-                                className="font-normal"
+                                className="font-normal text-center"
                               >
-                                {jobCategory}
+                                {jobCategory.toLowerCase() === "on site" && (
+                                  <Chip
+                                    variant="ghost"
+                                    color="blue"
+                                    value={jobCategory}
+                                  />
+                                )}
+                                {jobCategory.toLowerCase() === "remote" && (
+                                  <Chip
+                                    variant="ghost"
+                                    color="purple"
+                                    value={jobCategory}
+                                  />
+                                )}
+                                {jobCategory.toLowerCase() === "part time" && (
+                                  <Chip
+                                    variant="ghost"
+                                    color="light-green"
+                                    value={jobCategory}
+                                  />
+                                )}
+                                {jobCategory.toLowerCase() === "hybrid" && (
+                                  <Chip
+                                    variant="ghost"
+                                    color="cyan"
+                                    value={jobCategory}
+                                  />
+                                )}
                               </Typography>
                             </div>
                           </td>
@@ -255,7 +283,7 @@ export default function MyJobs() {
         </Card>
       </Container>
 
-     <EditJobs open={open} handleOpen={handleOpen} />
+      <EditJobs open={open} handleOpen={handleOpen} />
     </div>
   );
 }

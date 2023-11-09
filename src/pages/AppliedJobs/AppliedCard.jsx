@@ -1,13 +1,7 @@
 /* eslint-disable react/prop-types */
-import { Card, CardBody, Typography } from "@material-tailwind/react";
+import { Card, CardBody, Chip, Typography } from "@material-tailwind/react";
 export default function AppliedCard({ job }) {
-  const {
-    resumeURL,
-    applierName,
-    applierEmail,
-    jobTitle,
-    jobCategory,
-  } = job;
+  const { resumeURL, applierName, applierEmail, jobTitle, jobCategory } = job;
 
   return (
     <Card className="mt-6 transition hover:scale-105 hover:shadow-xl">
@@ -29,10 +23,21 @@ export default function AppliedCard({ job }) {
           <Typography
             as="p"
             variant="small"
-            className="font-normal flex items-center gap-1"
+            className="font-normal flex items-center gap-1 text-center"
           >
-            <span className="font-bold">Job Category</span>
-            {jobCategory}
+            <span className="font-bold mr-2">Job Category:</span>
+            {jobCategory.toLowerCase() === "on site" && (
+              <Chip variant="ghost" color="blue" size="sm" value={jobCategory} />
+            )}
+            {jobCategory.toLowerCase() === "remote" && (
+              <Chip variant="ghost" color="purple" size="sm" value={jobCategory} />
+            )}
+            {jobCategory.toLowerCase() === "part time" && (
+              <Chip variant="ghost" color="light-green" size="sm" value={jobCategory} />
+            )}
+            {jobCategory.toLowerCase() === "hybrid" && (
+              <Chip variant="ghost" color="cyan" size="sm" value={jobCategory} />
+            )}
           </Typography>
         </div>
       </CardBody>

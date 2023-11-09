@@ -82,24 +82,24 @@ export default function JobDetails() {
             </Typography>
           </div>
           <div className=" flex-1 flex flex-col gap-4">
-            <Typography variant="paragraph" className="font-medium">
-              Posted by : {loggedInUserName ? loggedInUserName : ""}
+            <Typography variant="paragraph" className="font-normal">
+             <span className="font-semibold">Posted by :</span>  {loggedInUserName ? loggedInUserName : ""}
             </Typography>
-            <Typography variant="paragraph" className="font-medium">
-              Job Category : {jobCategory ? jobCategory : ""}
+            <Typography variant="paragraph" className="font-normal" >
+             <span className="font-semibold">Job Category :</span>  {jobCategory ? jobCategory : ""}
             </Typography>
-            <Typography variant="paragraph" className="font-medium">
-            salaryRange : {salaryRange ? salaryRange : ""}
+            <Typography variant="paragraph" className="font-normal" >
+            <span className="font-semibold">salaryRange :</span> {salaryRange ? salaryRange : ""}
             </Typography>
-            <Typography variant="paragraph" className="font-medium">
-              Job Posting Date : {jobPostingDate ? jobPostingDate : ""}
+            <Typography variant="paragraph" className="font-normal" >
+              <span className="font-semibold">Job Posting Date :</span> {jobPostingDate ? jobPostingDate : ""}
             </Typography>
-            <Typography variant="paragraph" className="font-medium">
-              Application Deadline :{" "}
+            <Typography variant="paragraph" className="font-normal" >
+              <span className="font-semibold">Application Deadline :</span>{" "}
               {applicationDeadline ? applicationDeadline : ""}
             </Typography>
-            <Typography variant="paragraph" className="font-medium">
-              Applicant : {jobApplicantsNumber ? jobApplicantsNumber : "0"} {" "}
+            <Typography variant="paragraph" className="font-normal" >
+              <span className="font-semibold">Applicant :</span> {jobApplicantsNumber ? jobApplicantsNumber : "0"} {" "}
               Person.
             </Typography>
             <Button className="bg-violet-500" onClick={handleOpen}>

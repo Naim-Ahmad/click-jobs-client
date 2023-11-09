@@ -4,6 +4,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Chip,
   IconButton,
   Input,
   Tab,
@@ -110,7 +111,7 @@ export default function AlJobs() {
   useEffect(() => {
     if (isFetched) setJobs(data);
   }, [data]);
-
+  
   const handleSearch = () => {
     console.log(search);
     const searchString = search.toLowerCase();
@@ -121,10 +122,19 @@ export default function AlJobs() {
 
     const filteredJobs = jobs?.filter((obj) => {
       const dataString = obj.jobTitle.toLowerCase();
-      return dataString.startsWith(searchString)
+      return dataString.startsWith(searchString);
     });
 
     setJobs(filteredJobs);
+  };
+
+  const handleBlur = (e) => {
+    const value = e.target.value;
+    if(!value){
+      setJobs(data)
+    }else{
+      setSearch(value)
+    }
   };
 
   if (isLoading) {
@@ -167,7 +177,7 @@ export default function AlJobs() {
                 <Input
                   type="search"
                   label="Job title"
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={handleBlur}
                   className="pr-20"
                   containerProps={{
                     className: "min-w-0",
@@ -253,9 +263,14 @@ export default function AlJobs() {
                             <Typography
                               variant="small"
                               color="blue-gray"
-                              className="font-normal"
+                              className="font-normal text-center"
+                          
                             >
-                              {jobCategory}
+                              {jobCategory.toLowerCase() === 'on site' && <Chip variant="ghost" color="blue" value={jobCategory} />}
+                              {jobCategory.toLowerCase() === 'remote' && <Chip variant="ghost" color="purple" value={jobCategory} />}
+                              {jobCategory.toLowerCase() === 'part time' && <Chip variant="ghost" color="light-green" value={jobCategory} />}
+                              {jobCategory.toLowerCase() === 'hybrid' && <Chip variant="ghost" color="cyan" value={jobCategory} />}
+                              
                             </Typography>
                           </div>
                         </td>

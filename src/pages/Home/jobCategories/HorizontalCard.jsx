@@ -5,11 +5,14 @@ import {
   Typography
 } from "@material-tailwind/react";
 import PropTypes from "prop-types";
+import toast from "react-hot-toast";
 import { TbCalendarTime } from 'react-icons/tb';
 import { Link } from "react-router-dom";
 import appliedImage from '../../../assets/noun-job-application-2045858.svg';
+import useAuth from '../../../hooks/useAuth';
 
 export default function HorizontalCard({ job }) {
+  const {user} = useAuth()
   const {
     _id,
     jobTitle,
@@ -47,7 +50,7 @@ export default function HorizontalCard({ job }) {
           </Typography>
         </div>
       <Link to={`/job-details/${_id}`} className="pt-0 flex justify-center">
-        <Button className="text-center bg-violet-500" size="sm">view details</Button>
+        <Button onClick={()=> user || toast.error("You have to log in first to view details")} className="text-center bg-violet-500" size="sm">view details</Button>
       </Link>
       </CardBody>
     </Card>

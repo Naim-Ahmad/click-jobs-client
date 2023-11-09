@@ -1,10 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
+import Marquee from "react-fast-marquee";
 import Container from "../../../components/Container";
+import MySpinner from "../../../components/MySpinner";
 import SectionDescription from "../../../components/SectionDescription";
 import SectionHeader from "../../../components/SectionHeader";
 import SectionTitle from "../../../components/SectionTitle";
+import axios from "../../../config/axios.config";
 import CardWithLink from "./CardWithLink";
 
 export default function FeaturedSections() {
+
+  const {data, isLoading} = useQuery({
+    queryKey: ["employs"],
+    queryFn: async ()=>{
+      const result  = await axios.get('/employs')
+      return result.data;
+    }
+  })
+
+  if(isLoading) return <MySpinner/>
+  
   return (
     <div>
       <Container>
@@ -20,11 +35,11 @@ export default function FeaturedSections() {
           </SectionDescription>
         </SectionHeader>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <CardWithLink/>
-            <CardWithLink/>
-            <CardWithLink/>
-        </div>
+        <Marquee>
+          <div className="flex gap-6 py-6">
+           {data.map(d=> <CardWithLink key={d._id} data={d} />)}
+          </div>
+        </Marquee>
       </Container>
     </div>
   );

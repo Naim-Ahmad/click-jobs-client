@@ -8,11 +8,13 @@ import {
 } from "@material-tailwind/react";
 import toast from "react-hot-toast";
 import MySpinner from '../../../components/MySpinner';
+// import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 import useJobs from "../../../hooks/useJobs";
 import HorizontalCard from "./HorizontalCard";
 
 export default function TabsDefault() {
-  const {jobs, isError, isLoading, error } = useJobs()
+  const { jobs, isError, isLoading, error } = useJobs();
 
   // console.log(filteredByCategory)
 
@@ -34,9 +36,9 @@ export default function TabsDefault() {
       value: "hybrid",
     },
   ];
-console.log(jobs)
-  if(isError){
-    toast.error(error?.message)
+  console.log(jobs);
+  if (isError) {
+    toast.error(error?.message);
   }
 
   return (
@@ -70,5 +72,28 @@ console.log(jobs)
         ))}
       </TabsBody>
     </Tabs>
+
+    /** this is by react tabs */
+    // <Tabs>
+    //   <TabList>
+    //     {data.map((d) => (
+    //       <Tab>{d.label}</Tab>
+    //     ))}
+    //   </TabList>
+
+    //   {data?.map((d) => {
+    //     return (
+    //       <TabPanel key={d.value}>
+    //         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    //         {jobs?.map((job) => {
+    //           if (job.jobCategory.toLowerCase() === d.value) {
+    //             return <HorizontalCard key={job._id} job={job} />;
+    //           }
+    //         })}
+    //         </div>
+    //       </TabPanel>
+    //     );
+    //   })}
+    // </Tabs>
   );
 }
