@@ -7,5 +7,9 @@
  * TODO: tab filter in all jobs 
  * TODO: set axios interceptor
  * TODO: handle errror in edit job
+ * TODO: featured tab complete
+ * TODO: fremer motion
+ * TODO: search and tab functionlity in all jobs
+ * TODO: my profile page
  *
  */

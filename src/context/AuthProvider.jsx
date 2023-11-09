@@ -42,14 +42,23 @@ export default function AuthProvider({children}) {
         return signOut(auth)
     }
     
-
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, (user)=> {
             setUser(user)
             if(user?.email){
                 axios.post('/create-token', {email: user.email})
+                .then(res=> {
+                    console.log(res)
+                })
+                .catch(err=> console.log(err))
             }else{
                 axios.delete('/delete-token')
+                .then(res=> {
+                    console.log(res)
+                })
+                .catch(err=> {
+                    console.log(err)
+                })
             }
             setLoading(false)
         })

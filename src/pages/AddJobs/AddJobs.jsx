@@ -18,11 +18,18 @@ import WebTitle from "../../components/WebTitle";
 import useAuth from "../../hooks/useAuth";
 import usePostJob from "../../hooks/usePostJob";
 
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+
+
 export default function AddJobs() {
   const [selectValue, setSelectValue] = useState("");
   const { user } = useAuth();
 
   const {mutate, isPending, isSuccess, isError, error} = usePostJob()
+
+  const [startDate, setStartDate] = useState(new Date())
 
   const handleSelect = (e) => {
     setSelectValue(e);
@@ -52,6 +59,7 @@ export default function AddJobs() {
     };
 
    mutate(formData)
+  // console.log(formData)
     
   }
 
@@ -100,6 +108,7 @@ export default function AddJobs() {
                   </Typography>
                   <Input
                     placeholder="Ex. Senior Web Developer"
+                    required
                     name="jobTitle"
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
@@ -113,12 +122,12 @@ export default function AddJobs() {
                   </Typography>
                   <Input
                     placeholder="Job Description"
+                    required
                     name="jobDescription"
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
                       className: "before:content-none after:content-none",
                     }}
-                    required
                   />
                 </div>
 
@@ -131,6 +140,7 @@ export default function AddJobs() {
                     variant="outlined"
                     label="Select a category"
                     onChange={handleSelect}
+                    required
                   >
                     <Option value="On Site">On Site</Option>
                     <Option value="Remote">Remote</Option>
@@ -145,6 +155,7 @@ export default function AddJobs() {
                   </Typography>
                   <Input
                     placeholder="Ex. $200 - $300"
+                    required
                     name="salaryRange"
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
@@ -153,18 +164,12 @@ export default function AddJobs() {
                   />
                 </div>
 
-                <div>
+                <div className="w-full flex flex-col">
                   <Typography variant="h6" color="blue-gray" className="mb-3">
                     Application Deadline
                   </Typography>
-                  <Input
-                    type="date"
-                    name="applicationDeadline"
-                    className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                    labelProps={{
-                      className: "before:content-none after:content-none",
-                    }}
-                  />
+                
+                  <ReactDatePicker name="applicationDeadline" dateFormat="dd, MMMM" placeholderText="dd/mm" calendarClassName="w-full" minDate={new Date()} className="peer w-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900  !border-t-blue-gray-200 focus:!border-t-gray-900" onChange={(date) => setStartDate(date)} selected={startDate} showDisabledMonthNavigation/>
                 </div>
 
                 <div>
@@ -175,6 +180,7 @@ export default function AddJobs() {
                     type="url"
                     name="jobBannerURL"
                     placeholder="Ex. https://i.ibb.co/example.jpg"
+                    required
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
                       className: "before:content-none after:content-none",

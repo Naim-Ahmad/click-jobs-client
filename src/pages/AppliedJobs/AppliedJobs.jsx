@@ -39,7 +39,10 @@ export default function AppliedJobs() {
 
   if (isLoading) return <MySpinner />;
 
-  if (isError) return toast.error(error.message);
+  if (isError) {
+    toast.error(error.message);
+    return console.log(error);
+  }
 
   console.log(jobs);
 
@@ -68,7 +71,9 @@ export default function AppliedJobs() {
           </div>
         </SectionHeader>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {jobs.map((job) => <AppliedCard key={job._id} job={job}/>)}
+          {jobs.map((job) => (
+            <AppliedCard key={job._id} job={job} />
+          ))}
         </div>
       </Container>
     </div>

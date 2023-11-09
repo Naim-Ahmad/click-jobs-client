@@ -1,3 +1,4 @@
+import { Typography } from "@material-tailwind/react";
 import naimImage from "../../assets/naimahmad.jpeg";
 
 export default function Blogs() {
@@ -5,9 +6,9 @@ export default function Blogs() {
     <div>
       <header className="max-w-[900px] mx-auto px-4 sm:px-10 mt-6">
         <h1 className="text-4xl font-extrabold">
-          - What is an access token and refresh token? How do they work and
-          where should we store them on the client-side? - What is express js?
-          What is Nest JS (google it)? - Explain your code.
+          What is an access token and refresh token? How do they work and
+          where should we store them on the client-side? What is express js?
+          What is Nest JS ?.
         </h1>
         <div className="flex mt-6">
           <figure className="me-4">
@@ -25,7 +26,7 @@ export default function Blogs() {
         <div className="divider"></div>
         <article>
           <div>
-            <h2>Access Token and Refresh Token</h2>
+            <Typography variant="h5">Access Token and Refresh Token</Typography>
 
             <p>
               <strong>Access Token:</strong> An access token is a temporary and
@@ -94,6 +95,28 @@ export default function Blogs() {
                 there are platform-specific secure storage mechanisms.
               </li>
             </ul>
+          </div>
+          <div className="py-10">
+            <Typography variant="h5">What is Express.js?</Typography>
+            <p>
+              <strong>Express.js</strong> is a minimal and flexible Node.js web
+              application framework that is commonly used to build web and API
+              servers. It simplifies the process of handling HTTP requests,
+              routing, middleware, and other web-related tasks. Express.js is
+              known for its simplicity, performance, and a large ecosystem of
+              middleware and extensions.
+            </p>
+
+            <h2>What is Nest.js?</h2>
+            <p>
+              <strong>Nest.js</strong> is a full-featured, extensible Node.js
+              framework that is designed for building scalable and maintainable
+              server-side applications. It builds on top of Express.js and
+              provides a structured, modular, and opinionated architecture for
+              developing applications. Nest.js promotes the use of decorators,
+              modules, and dependency injection, making it suitable for building
+              enterprise-grade applications.
+            </p>
           </div>
         </article>
       </main>
